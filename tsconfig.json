@@ -23,7 +23,7 @@
     "typings",
     "**/__test__",
     "test",
-    "docs",
+    "docsSrc",
     "tests"
   ]
 }

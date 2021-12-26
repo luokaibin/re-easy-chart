@@ -1,13 +1,13 @@
 export default {
-  base: '/',
-  src: './docs',
+  base: '/re-easy-chart/',
+  src: './docsSrc',
   title: 're-easy-chart',
   // codeSandbox: false,
   typescript: true,
   menu: [
     '使用文档',
   ],
-  dest: 'dist',
+  dest: 'docs',
   public: './static',
   // modifyBundlerConfig: (bundlerConfig) => {
   //   const customizeRules = [{ test: /\.css$/, loader: 'style-loader!css-loader' }];
