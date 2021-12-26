@@ -1,6 +1,8 @@
 ## re-easy-chart
 
-一个简单易用的 react 图表库，基于 echarts 二次封装
+一个简单易用的 react 图表库，基于 echarts 二次封装。
+
+**[官方文档](https://luokaibin.github.io/re-easy-chart/)**
 
 ## 安装
 
