@@ -1,0 +1,293 @@
+---
+name: 2. 图表示例
+menu: 使用文档
+route: /line
+---
+
+import { Playground } from 'docz';
+import { AxisType, Chart, ChartType, Trigger, PointerType, LegendIcon } from '../src';
+import { chartLabelFormatter, scatterLabelFormatter } from './demos/chartLabelFormatter'
+import dataSource from '../static/lineDataSource.json'
+import barDataSource from '../static/barDataSource.json'
+
+## 折线图与面积图
+
+<Playground>
+{() => {
+  return (
+    <Chart
+      chartType={ChartType.LINE} // 可切换为 ChartType.LINE 或 ChartType.AREA
+      height={300} // 图标高度
+      position="x*y"
+      theme={{
+        padding: {
+          top: 10,
+          left: 30,
+          right: 10,
+          bottom: 50
+        },
+        stack: true, // 堆叠模式
+        smooth: true, // 平滑曲线
+        labelShow: false, // 是否显示数据标签
+        yAxis: {
+          type: AxisType.VALUE, // y轴数据类型 数值轴
+        },
+        xAxis: {
+          type: AxisType.TIME, // 时间轴
+          gridLineEnable: false, // 显示分割线
+          tickTextFormatter: {
+            year: '{yyyy}',
+            month: '{MM}',
+            day: '{MM}-{dd}',
+            hour: '{HH}:{mm}',
+            minute: '{HH}:{mm}',
+            second: '{HH}:{mm}:{ss}',
+            millisecond: '{hh}:{mm}:{ss}',
+          },
+        },
+        legend: {
+          enable: true, // 显示图例
+          itemHeight: 5, // 图例标记的图形高度
+        },
+        tooltip: {
+          trigger: Trigger.AXIS, // 可切换为 Trigger.ITEM 或 Trigger.NONE
+          formatter: chartLabelFormatter,
+        },
+      }}
+      group="g"
+      dataSource={dataSource}
+    />
+  )
+}}
+</Playground>
+
+### chartLabelFormatter
+
+```ts
+export const chartLabelFormatter = (params) => {
+  const rows = params.reduce((prev, curr) => {
+    const {
+      seriesName,
+      value: [, value],
+      color,
+    } = curr;
+    prev = `${prev}
+  <div style="margin: 0;line-height: 1.3em;display: flex;align-items: center;">
+    <div style="width: 10px;height: 10px; border-radius: 50%;background: ${color}; margin-right: 0.5em;"></div>
+    <div style="width: 450px;white-space: normal;word-break: break-all;">${seriesName}</div>
+    <div style="margin-left: 2em;font-size: 1.3em;">${value}</div>
+  </div>`;
+    return prev;
+  }, '');
+
+  const currTime = params?.[0]?.name || params?.[0]?.value?.[0];
+  const html = `
+  <div style="display: flex;flex-direction: column;">
+    <h4 style="margin: 0;line-height: 1.3em;">${currTime}</h4>
+    ${rows}
+  </div>`;
+
+  return html;
+};
+```
+## 垂直柱状图
+
+<Playground>
+{() => {
+  return (
+    <Chart
+      chartType={ChartType.BAR}
+      height={500} // 图标高度
+      position="x*y"
+      theme={{
+        padding: {
+          top: 10,
+          left: 30,
+          right: 10,
+          bottom: 50
+        },
+        stack: true, // 堆叠模式
+        labelShow: false, // 是否显示数据标签
+        yAxis: {
+          type: AxisType.VALUE, // y轴数据类型 数值轴
+        },
+        xAxis: {
+          type: AxisType.TIME, // 时间轴
+          gridLineEnable: false, // 显示分割线
+          tickTextFormatter: {
+            year: '{yyyy}',
+            month: '{MM}',
+            day: '{MM}-{dd}',
+            hour: '{HH}:{mm}',
+            minute: '{HH}:{mm}',
+            second: '{HH}:{mm}:{ss}',
+            millisecond: '{hh}:{mm}:{ss}',
+          },
+        },
+        legend: {
+          enable: true, // 显示图例
+          itemHeight: 14, // 图例标记的图形高度
+        },
+        tooltip: {
+          trigger: Trigger.AXIS, // 可切换为 Trigger.ITEM 或 Trigger.NONE
+          axisPointerType: PointerType.SHADOW,
+          formatter: chartLabelFormatter,
+        },
+      }}
+      group="g"
+      dataSource={barDataSource}
+    />
+  )
+}}
+</Playground>
+
+### chartLabelFormatter
+
+```ts
+export const chartLabelFormatter = (params) => {
+  const rows = params.reduce((prev, curr) => {
+    const {
+      seriesName,
+      value: [, value],
+      color,
+    } = curr;
+    prev = `${prev}
+  <div style="margin: 0;line-height: 1.3em;display: flex;align-items: center;">
+    <div style="width: 10px;height: 10px; border-radius: 50%;background: ${color}; margin-right: 0.5em;"></div>
+    <div style="width: 450px;white-space: normal;word-break: break-all;">${seriesName}</div>
+    <div style="margin-left: 2em;font-size: 1.3em;">${value}</div>
+  </div>`;
+    return prev;
+  }, '');
+
+  const currTime = params?.[0]?.name || params?.[0]?.value?.[0];
+  const html = `
+  <div style="display: flex;flex-direction: column;">
+    <h4 style="margin: 0;line-height: 1.3em;">${currTime}</h4>
+    ${rows}
+  </div>`;
+
+  return html;
+};
+```
+
+## 散点图
+
+<Playground>
+{() => {
+  return (
+    <Chart
+      chartType={ChartType.SCATTER}
+      height={500} // 图标高度
+      position="x*y"
+      theme={{
+        padding: {
+          top: 10,
+          left: 30,
+          right: 10,
+          bottom: 50
+        },
+        stack: true, // 堆叠模式
+        labelShow: false, // 是否显示数据标签
+        yAxis: {
+          type: AxisType.VALUE, // y轴数据类型 数值轴
+        },
+        xAxis: {
+          type: AxisType.TIME, // 时间轴
+          gridLineEnable: false, // 显示分割线
+          tickTextFormatter: {
+            year: '{yyyy}',
+            month: '{MM}',
+            day: '{MM}-{dd}',
+            hour: '{HH}:{mm}',
+            minute: '{HH}:{mm}',
+            second: '{HH}:{mm}:{ss}',
+            millisecond: '{hh}:{mm}:{ss}',
+          },
+        },
+        legend: {
+          enable: true, // 显示图例
+          itemHeight: 14, // 图例标记的图形高度
+          icon: LegendIcon.PIN
+        },
+        tooltip: {
+          trigger: Trigger.ITEM, // 可切换为 Trigger.ITEM 或 Trigger.NONE
+          formatter: scatterLabelFormatter
+        },
+      }}
+      group="g"
+      dataSource={barDataSource}
+    />
+  )
+}}
+</Playground>
+
+## 饼图
+
+<Playground>
+{() => {
+  return (
+    <Chart
+      chartType={ChartType.PIE}
+      height={500} // 图标高度
+      position="x*y"
+      dataSource={[
+        {x: '1月', y: 50},
+        {x: '2月', y: 66},
+        {x: '3月', y: 80},
+        {x: '4月', y: 72},
+        {x: '5月', y: 70},
+        {x: '6月', y: 100},
+        {x: '7月', y: 52},
+        {x: '8月', y: 43},
+        {x: '9月', y: 90},
+        {x: '10月', y: 100},
+        {x: '11月', y: 88},
+        {x: '12月', y: 67},
+      ]}
+      theme={{
+        padding: {
+          top: 10,
+          left: 30,
+          right: 10,
+          bottom: 50
+        },
+        labelShow: false, // 是否显示数据标签
+        legend: {
+          enable: true, // 显示图例
+          itemHeight: 35,
+          icon: "path://M791.4879760742188,544.094970703125c-1.27996826171875,-129.69497680664062,105.760009765625,-191.8709716796875,110.52801513671875,-194.9749755859375c-60.15997314453125,-88.031982421875,-153.85601806640625,-100.06399536132812,-187.23199462890625,-101.47200012207031c-79.7440185546875,-8.063995361328125,-155.583984375,46.94401550292969,-196.06402587890625,46.94401550292969c-40.351959228515625,0,-102.81597900390625,-45.760009765625,-168.9599609375,-44.54400634765625c-86.91201782226562,1.279998779296875,-167.07200622558594,50.527984619140625,-211.80801391601562,128.38400268554688c-90.30399703979492,156.7030029296875,-23.13599395751953,388.83099365234375,64.89601135253906,515.9349975585938c43.00799560546875,62.2080078125,94.30400085449219,132.06402587890625,161.6320037841797,129.5679931640625c64.83200073242188,-2.59197998046875,89.3759765625,-41.9520263671875,167.74398803710938,-41.9520263671875s100.416015625,41.9520263671875,169.0560302734375,40.67205810546875c69.75994873046875,-1.31201171875,113.98394775390625,-63.39202880859375,156.7039794921875,-125.79205322265625c49.3759765625,-72.15997314453125,69.72796630859375,-142.0479736328125,70.9119873046875,-145.6319580078125c-1.5360107421875,-0.70404052734375,-136.06402587890625,-52.2239990234375,-137.40802001953125,-207.13604736328125ZM662.5599975585938,163.52000427246094C698.3040161132812,120.16000366210938,722.4320068359375,60,715.8400268554688,0c-51.488037109375,2.111999988555908,-113.88800048828125,34.30400085449219,-150.8160400390625,77.53600311279297c-33.1519775390625,38.36799621582031,-62.14398193359375,99.6159896850586,-54.36798095703125,158.43199920654297c57.47198486328125,4.4799957275390625,116.12799072265625,-29.21600341796875,151.90399169921875,-72.447998046875Z"
+        },
+        pie: {
+          circle: true,
+          circleItem: {
+            borderRadius: 10,
+            borderWidth: 3,
+            borderColor: '#fff'
+          }
+        },
+        tooltip: {
+          trigger: Trigger.ITEM, // 可切换为 Trigger.ITEM 或 Trigger.NONE
+        },
+      }}
+    />
+  )
+}}
+</Playground>
+
+### scatterLabelFormatter
+
+```ts
+export const scatterLabelFormatter = (params) => {
+  const html = `
+  <div style="display: flex;flex-direction: column;">
+    <h4 style="margin: 0;line-height: 1.3em;">${params.data[0]}</h4>
+    <div style="margin: 0;line-height: 1.3em;display: flex;align-items: center;">
+      <div style="width: 10px;height: 10px; border-radius: 50%;background: ${params.color}; margin-right: 0.5em;"></div>
+      <div style="width: 450px;white-space: normal;word-break: break-all;">${params.seriesName}</div>
+      <div style="margin-left: 2em;font-size: 1.3em;">${params.data[1]}</div>
+    </div>
+  </div>`
+  return html
+}
+```

@@ -1,0 +1,135 @@
+---
+name: 1. 组件属性
+menu: 使用文档
+route: /
+---
+
+## 基本属性
+
+|属性|类型|必填|默认值|说明|
+|---|---|---|---|---|
+|height|number|是|-|图标高度|
+|dataSource|[IDataSource[]](#idatasource)|是|-|图表的数据|
+|chartType|[ChartType](#charttype)|是|ChartType.LINE|图表类型|
+|position|string|是|-|格式为 xfield(X轴字段key)\*yfield(Y轴字段key)|
+|group|string|否|-|分组|
+|theme|[Theme](#theme)|否|-|图表主题设置|
+|title|string|否|-|图表标题|
+
+## Theme
+
+| 属性         | 类型         | 必填 | 默认值 | 说明                                                  |
+| ------------ | ------------ | ---- | ------ | ----------------------------------------------------- |
+| yAxis        | [ThemeAxis](#themeaxis)    | 否   | -      | Y轴设置                                               |
+| xAxis        | [ThemeAxis](#themeaxis)    | 否   | -      | X轴设置                                               |
+| legend       | [ThemeLegend](#themelegend)  | 否   | -      | 图例设置                                              |
+| padding      | [Position](#position)     | 否   | -      | 图表间距设置                                          |
+| tooltip      | [ThemeTooltip](#themetooltip) | 否   | -      | 图表提示框设置                                        |
+| smooth       | boolean      | 否   | false  | 是否平滑曲线 **仅折线图、面积图生效**                 |
+| stack        | boolean      | 否   | false  | 是否启用堆叠模式 **仅折线图、面积图、垂直柱状图生效** |
+| connectNulls | boolean      | 否   | true   | 是否连接空值，**仅折线图、面积图生效**                |
+| labelShow    | boolean      | 否   | true   | 是否在图形上显示标签                                  |
+| Pie          | [Pie](#pie)          | 否   | -      | 饼图设置                                              |
+
+## ThemeAxis
+
+| 属性              | 类型                                 | 必填 | 默认值               | 说明                                                         |
+| ----------------- | ------------------------------------ | ---- | -------------------- | ------------------------------------------------------------ |
+| type              | AxisType                             | 否   | AxisType.CATEGORY    | 坐标轴类型                                                   |
+| enable            | boolean                              | 否   | true                 | 是否显示 轴线 刻度 刻度标签                                  |
+| name              | string                               | 否   | -                    | 坐标轴名称                                                   |
+| nameColor         | string                               | 否   | b0b0b0               | 坐标轴名称的颜色                                             |
+| nameFontSize      | number                               | 否   | 12                   | 坐标轴名称文字的字体大小                                     |
+| nameGap           | number                               | 否   | 15                   | 坐标轴名称与轴线的距离                                       |
+| lineColor         | string                               | 否   | cecece               | 轴线颜色                                                     |
+| tickLength        | number                               | 否   | 5                    | 刻度线长度                                                   |
+| tickFontSize      | number                               | 否   | 取 nameFontSize 的值 | 刻度字体大小                                                 |
+| tickTextColor     | string                               | 否   | 取 nameColor 的值    | 刻度标签颜色                                                 |
+| tickLineColor     | string                               | 否   | cecece               | 刻度线颜色                                                   |
+| tickTextFormatter | IAxisLabel['axisLabel']['formatter'] | 否   | -                    | 刻度标签的内容格式器，支持字符串模板和回调函数两种形式。<br/>[https://echarts.apache.org/zh/option.html#xAxis.axisLabel.formatter](https://echarts.apache.org/zh/option.html#xAxis.axisLabel.formatter) |
+| gridLineEnable    | boolean                              | 否   | -                    | 是否显示 grid 分隔线                                         |
+| gridLineColor     | string                               | 否   | ececec               | grid 分隔线颜色                                              |
+
+## ThemeLegend
+
+| 属性       | 类型    | 必填 | 默认值 | 说明               |
+| ---------- | ------- | ---- | ------ | ------------------ |
+| enable     | boolean | 否   | false  | 是否显示图例       |
+| fontSize   | number  | 否   | -      | 图例文字大小       |
+| color      | string  | 否   | -      | 图例文字颜色       |
+| itemHeight | number  | 否   | -      | 图例标记的图形高度 |
+| icon | LegendIcon \| string  | 否   | -      | 图例项的icon<br/>[https://echarts.apache.org/zh/option.html#legend.icon](https://echarts.apache.org/zh/option.html#legend.icon) |
+
+## Position
+
+| 属性   | 类型   | 必填 | 默认值 | 说明   |
+| ------ | ------ | ---- | ------ | ------ |
+| top    | number | 否   | -      | 上边距 |
+| right  | number | 否   | -      | 右边距 |
+| bottom | number | 否   | -      | 下边距 |
+| left   | number | 否   | -      | 左边距 |
+
+## ThemeTooltip
+
+| 属性            | 类型        | 必填 | 默认值 | 说明                                                         |
+| --------------- | ----------- | ---- | ------ | ------------------------------------------------------------ |
+| trigger         | Trigger     | 否   | -      | 触发类型                                                     |
+| axisPointerType | PointerType | 否   | -      | 指示器类型<br/>[https://echarts.apache.org/zh/option.html#tooltip.axisPointer.type](https://echarts.apache.org/zh/option.html#tooltip.axisPointer.type)                                                   |
+| formatter       | IFormat     | 否   | -      | 提示框浮层内容格式器，支持字符串模板和回调函数两种形式。<br />[https://echarts.apache.org/zh/option.html#tooltip.formatter](https://echarts.apache.org/zh/option.html#tooltip.formatter) |
+
+## Pie
+
+| 属性       | 类型                         | 必填 | 默认值 | 说明                                                         |
+| ---------- | ---------------------------- | ---- | ------ | ------------------------------------------------------------ |
+| circle     | boolean                      | 否   | false  | 是否显示为环形图                                             |
+| circleItem | PieSeriesOption['itemStyle'] | 否   | -      | 饼图图形样式，**完全等同于 echarts 饼图 itemStyle**<br/>[https://echarts.apache.org/zh/option.html#series-pie.itemStyle](https://echarts.apache.org/zh/option.html#series-pie.itemStyle) |
+
+## 类型
+
+### IDataSource
+
+```tsx
+type IDataSource = {
+  [key: string]: string|number
+}
+```
+
+### ChartType
+
+| 取值              | 说明       |
+| ----------------- | ---------- |
+| ChartType.BAR     | 垂直柱状图 |
+| ChartType.LINE    | 折线图     |
+| ChartType.SCATTER | 散点图     |
+| ChartType.AREA    | 面积图     |
+| ChartType.PIE     | 饼图       |
+
+### AxisType
+
+| 取值              | 说明   |
+| ----------------- | ------ |
+| AxisType.VALUE    | 数值轴 |
+| AxisType.CATEGORY | 类目轴 |
+| AxisType.TIME     | 时间轴 |
+
+### Trigger
+
+> 参考[https://echarts.apache.org/zh/option.html#tooltip.trigger](https://echarts.apache.org/zh/option.html#tooltip.trigger)
+
+| 取值         | 说明                                                         |
+| ------------ | ------------------------------------------------------------ |
+| Trigger.ITEM | 数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。   |
+| Trigger.AXIS | 坐标轴触发，主要在柱状图，折线图等会使用类目轴的图表中使用。 |
+| Trigger.NONE | 什么都不触发                                                 |
+
+### PointerType
+
+> 参考 [https://echarts.apache.org/zh/option.html#tooltip.axisPointer.type](https://echarts.apache.org/zh/option.html#tooltip.axisPointer.type)
+
+| 取值               | 说明                                                         |
+| ------------------ | ------------------------------------------------------------ |
+| PointerType.LINE   | 直线指示器                                                   |
+| PointerType.SHADOW | 阴影指示器                                                   |
+| PointerType.CROSS  | 十字准星指示器。其实是种简写，表示启用两个正交的轴的 axisPointer。 |
+| PointerType.NONE   | 无指示器                                                     |
+
