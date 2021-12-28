@@ -4,6 +4,11 @@ tsconfig.json
 src
 doczrc.js
 .docz
+docs
+docsSrc
+static
 public
 .fatherrc.ts
 typings.d.ts
+gatsby-node.js
+readme.md

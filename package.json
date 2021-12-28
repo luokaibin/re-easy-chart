@@ -1,6 +1,6 @@
 {
   "name": "re-easy-chart",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "doc:dev": "rimraf -f .docz&&docz dev",
     "doc:build": "docz build",
@@ -9,6 +9,7 @@
   },
   "main": "es/index.js",
   "typings": "es/index.d.ts",
+  "repository": "https://github.com/luokaibin/re-easy-chart",
   "dependencies": {
     "@babel/runtime": "^7.16.5",
     "lodash-es": "^4.17.21"
