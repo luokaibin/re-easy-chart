@@ -1,4 +1,4 @@
-import { PieSeriesOption, XAXisComponentOption } from 'echarts';
+import { XAXisComponentOption, PieSeriesOption } from 'echarts';
 
 type IAxisLabel = Required<XAXisComponentOption>
 export enum AxisType {
@@ -41,6 +41,7 @@ export interface ThemeAxis {
    * 刻度标签的内容格式器，支持字符串模板和回调函数两种形式。
    * https://echarts.apache.org/zh/option.html#xAxis.axisLabel.formatter
    */
+  // @ts-ignore
   tickTextFormatter?: IAxisLabel['axisLabel']['formatter'];
   /**
    * 是否显示 grid 分隔线

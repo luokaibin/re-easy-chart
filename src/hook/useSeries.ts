@@ -3,7 +3,7 @@ import { UseSeries, ChartType } from '../types';
 import { useAxisField } from './useAxisField';
 import { useSeriesData } from './useSeriesData';
 
-export const useSeries = (params?: UseSeries) => {
+export const useSeries = (params?: UseSeries): any => {
   const {
     position = '',
     group,

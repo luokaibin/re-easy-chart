@@ -236,6 +236,9 @@ export const chartLabelFormatter = (params) => {
   return (
     <Chart
       chartType={ChartType.PIE}
+      click={(params) => {
+        alert(`${params.data.name}: ${params.data.value}`)
+      }}
       height={500} // 图标高度
       position="x*y"
       dataSource={[
